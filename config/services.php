@@ -19,6 +19,11 @@ return [
         'secret' => env('MAILGUN_SECRET'),
     ],
 
+    'rollbar' => [
+        'access_token' => env('ROLLBAR_ACCESS_TOKEN'),
+        'level' => env('ROLLBAR_LEVEL', 'debug'),
+    ],
+
     'ses' => [
         'key' => env('SES_KEY'),
         'secret' => env('SES_SECRET'),

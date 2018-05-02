@@ -41,17 +41,23 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => getenv("JAWSDB_MARIA_URL") ? parse_url(getenv("JAWSDB_MARIA_URL"))["host"] : env('DB_HOST', 'localhost'),
+            'port' => getenv("JAWSDB_MARIA_URL") ? parse_url(getenv("JAWSDB_MARIA_URL"))["port"] : env('DB_PORT', '3306'),
+            'database' => getenv("JAWSDB_MARIA_URL") ? substr(parse_url(getenv("JAWSDB_MARIA_URL"))["path"], 1) : env('DB_DATABASE', 'scotchbox'),
+            'username' => getenv("JAWSDB_MARIA_URL") ? parse_url(getenv("JAWSDB_MARIA_URL"))["user"] : env('DB_USERNAME', 'root'),
+            'password' => getenv("JAWSDB_MARIA_URL") ? parse_url(getenv("JAWSDB_MARIA_URL"))["pass"] : env('DB_PASSWORD', 'root'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'strict' => true,
             'engine' => null,
+            'modes' => [
+                'STRICT_TRANS_TABLES',
+                'ERROR_FOR_DIVISION_BY_ZERO',
+                'NO_AUTO_CREATE_USER',
+                'NO_ENGINE_SUBSTITUTION'
+            ],
         ],
 
         'pgsql' => [
@@ -65,17 +71,6 @@ return [
             'prefix' => '',
             'schema' => 'public',
             'sslmode' => 'prefer',
-        ],
-
-        'sqlsrv' => [
-            'driver' => 'sqlsrv',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
         ],
 
     ],
@@ -109,9 +104,9 @@ return [
         'client' => 'predis',
 
         'default' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
+            'host' => getenv("REDIS_URL") ? parse_url(getenv("REDIS_URL"))["host"] : env('REDIS_HOST', 'localhost'),
+            'password' => getenv("REDIS_URL") ? parse_url(getenv("REDIS_URL"))["pass"] : env('REDIS_PASSWORD', null),
+            'port' => getenv("REDIS_URL") ? parse_url(getenv("REDIS_URL"))["port"] : env('REDIS_PORT', 6379),
             'database' => 0,
         ],
 
