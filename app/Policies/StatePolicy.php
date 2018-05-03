@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\State;
+use App\Models\User;
+use App\Models\State;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class StatePolicy

@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Station;
+use App\Models\User;
+use App\Models\Station;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class StationPolicy
@@ -30,7 +30,7 @@ class StationPolicy
      */
     public function create(User $user)
     {
-      return $user->isAdmin();
+      return TRUE;
     }
 
     /**

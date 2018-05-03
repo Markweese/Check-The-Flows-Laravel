@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
-use App\Reading;
+use App\Models\User;
+use App\Models\Reading;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ReadingPolicy
