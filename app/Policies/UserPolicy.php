@@ -5,7 +5,7 @@ namespace App\Policies;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class userPolicy
+class UserPolicy
 {
     use HandlesAuthorization;
 
@@ -18,7 +18,7 @@ class userPolicy
      */
     public function view(User $user, User $model)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -29,7 +29,7 @@ class userPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -41,7 +41,7 @@ class userPolicy
      */
     public function update(User $user, User $model)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -53,6 +53,6 @@ class userPolicy
      */
     public function delete(User $user, User $model)
     {
-        //
+        return $user->isAdmin();
     }
 }

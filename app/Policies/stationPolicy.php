@@ -6,7 +6,7 @@ use App\User;
 use App\Station;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class stationPolicy
+class StationPolicy
 {
     use HandlesAuthorization;
 
@@ -19,7 +19,7 @@ class stationPolicy
      */
     public function view(User $user, Station $station)
     {
-        //
+      return TRUE;
     }
 
     /**
@@ -30,7 +30,7 @@ class stationPolicy
      */
     public function create(User $user)
     {
-        //
+      return $user->isAdmin();
     }
 
     /**
@@ -42,7 +42,7 @@ class stationPolicy
      */
     public function update(User $user, Station $station)
     {
-        //
+        return $user->isAdmin();
     }
 
     /**
@@ -54,6 +54,6 @@ class stationPolicy
      */
     public function delete(User $user, Station $station)
     {
-        //
+        return $user->isAdmin();
     }
 }
