@@ -19,6 +19,13 @@ class CreateStatesTable extends Migration
             $table->string('abbr');
             $table->timestamps();
         });
+
+        // go ahead and seed the state database, since the list of states
+        // is small and fixed
+        Artisan::call( 'db:seed', [
+            '--class' => 'StatesTableSeeder',
+            '--force' => true ]
+        );
     }
 
     /**
