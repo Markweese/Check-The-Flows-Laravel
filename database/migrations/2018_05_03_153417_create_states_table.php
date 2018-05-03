@@ -17,7 +17,6 @@ class CreateStatesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('abbr');
-            $table->timestamps();
         });
 
         // go ahead and seed the state database, since the list of states

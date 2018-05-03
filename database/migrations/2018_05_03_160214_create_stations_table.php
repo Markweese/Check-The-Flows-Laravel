@@ -16,11 +16,17 @@ class CreateStationsTable extends Migration
         Schema::create('stations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('usgs_id');
+            $table->integer('usgs_id')->unsigned()->unique()->index();
             $table->decimal('lat', 10, 7);
             $table->decimal('lng', 10, 7);
-            $table->string('state');
+            $table->integer('state_id')->unsigned()->index();
             $table->timestamps();
+        });
+
+        Schema::create('station_user', function (Blueprint $table) {
+            $table->integer('station_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->primary(['station_id', 'user_id']);
         });
     }
 
@@ -32,5 +38,6 @@ class CreateStationsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('stations');
+        Schema::dropIfExists('station_user');
     }
 }

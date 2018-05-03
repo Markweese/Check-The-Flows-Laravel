@@ -14,9 +14,12 @@ class CreateReadingsTable extends Migration
     public function up()
     {
         Schema::create('readings', function (Blueprint $table) {
-          $table->integer('usgs_id');
-          $table->integer('reading');
-          $table->string('parameter');
+          $table->increments('id');
+          $table->integer('station_id')->unsigned()->index();
+          $table->integer('cfs')->nullable();
+          $table->integer('ph')->nullable();
+          $table->integer('temp')->nullable();
+          $table->integer('conductance')->nullable();
           $table->dateTime('reading_time');
           $table->timestamps();
         });
