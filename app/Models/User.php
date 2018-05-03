@@ -21,4 +21,13 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+  /**
+   * Get associated stations
+   *
+   * @return array
+   */
+    public function stations() {
+      return $this->hasMany('App\Models\Station');
+    }
 }
