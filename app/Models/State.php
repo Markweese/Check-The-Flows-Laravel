@@ -10,6 +10,8 @@ class State extends Model
     'name', 'abbr'
   ];
 
+  public $timestamps = false;
+
   public function stations() {
     $this->hasMany('App\Models\Station');
   }

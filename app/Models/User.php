@@ -11,7 +11,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'updated_at', 'created_at'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -21,6 +21,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+  /**
+   * Check if user is admin
+   *
+   * @return array
+   */
+   public function isAdmin() {
+     return $this->role == 'admin';
+   }
 
   /**
    * Get associated stations

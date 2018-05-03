@@ -3,8 +3,9 @@
 use Illuminate\Database\Seeder;
 
 class StatesTableSeeder extends Seeder
+
 {
-    private $_states = [
+    protected $_states = [
       ["name" => "Alaska", "abbr" => "AK"],
       ["name" => "Alabama", "abbr" => "AL"],
       ["name" => "Arkansas", "abbr" => "AR"],
@@ -65,7 +66,7 @@ class StatesTableSeeder extends Seeder
     public function run()
     {
       foreach ( $this->_states as $state ) {
-        \App\Models\State::firstOrCreate(['name' => $state->name, 'abbr' => $state->abbr]);
+        \App\Models\State::firstOrCreate(['name' => $state['name'], 'abbr' => $state['abbr']]);
       }
     }
 }

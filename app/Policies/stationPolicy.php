@@ -3,26 +3,27 @@
 namespace App\Policies;
 
 use App\User;
+use App\Station;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class userPolicy
+class stationPolicy
 {
     use HandlesAuthorization;
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can view the station.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Station  $station
      * @return mixed
      */
-    public function view(User $user, User $model)
+    public function view(User $user, Station $station)
     {
         //
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the user can create stations.
      *
      * @param  \App\User  $user
      * @return mixed
@@ -33,25 +34,25 @@ class userPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the user can update the station.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Station  $station
      * @return mixed
      */
-    public function update(User $user, User $model)
+    public function update(User $user, Station $station)
     {
         //
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the user can delete the station.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Station  $station
      * @return mixed
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user, Station $station)
     {
         //
     }
