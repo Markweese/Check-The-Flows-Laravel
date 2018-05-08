@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Station extends Model {
 
   protected $fillable = [
-    'name', 'usgs_id', 'lat', 'lng', 'state', 'updated_at', 'created_at'
+    'name', 'usgs_id', 'lat', 'lng', 'state_id', 'updated_at', 'created_at'
+  ];
+
+  protected $with = [
+    'readings'
   ];
 
 /**

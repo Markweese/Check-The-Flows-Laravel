@@ -14,3 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'states'], function() {
+  Route::get('/', 'StateController@index');
+  Route::get('/{state}', 'StateController@show');
+});
+
+Route::group(['prefix' => 'stations'], function() {
+  Route::get('/', 'StationController@index');
+  Route::get('/{station}', 'StationController@show');
+});
