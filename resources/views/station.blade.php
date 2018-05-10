@@ -14,6 +14,14 @@
         @foreach ($s->readings as $reading )
           <p>{{ $reading->cfs }} CFS</p>
         @endforeach
+
+        <h4>Conservation Groups</h4>
+        <ul>
+        @foreach ($s->initiatives as $initiative )
+          <li><a href="{{$initiative->landing_page}}"><img src="{{ $initiative->logo }}" alt="{{ $initiative->name }}">{{ $initiative->name }}</a></li>
+        @endforeach
+        </ul>
+
       @endforeach
     </body>
 </html>

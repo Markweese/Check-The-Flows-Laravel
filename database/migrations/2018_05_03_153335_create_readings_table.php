@@ -15,7 +15,7 @@ class CreateReadingsTable extends Migration
     {
         Schema::create('readings', function (Blueprint $table) {
           $table->increments('id');
-          $table->integer('station_id')->unsigned()->index();
+          $table->string('station_id')->index();
           $table->integer('cfs')->nullable();
           $table->integer('ph')->nullable();
           $table->integer('temp')->nullable();

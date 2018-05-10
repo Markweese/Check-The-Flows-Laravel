@@ -16,7 +16,8 @@ class CreateStationsTable extends Migration
         Schema::create('stations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('usgs_id')->unsigned()->unique()->index();
+            $table->string('usgs_id')->unique()->index();
+            $table->integer('huc8')->unsigned();
             $table->decimal('lat', 10, 7);
             $table->decimal('lng', 10, 7);
             $table->integer('state_id')->unsigned()->index();

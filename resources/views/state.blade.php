@@ -10,9 +10,12 @@
     </head>
     <body>
       @foreach ($state as $s)
-        <p>This is state: {{ $s->name }}</p>
+        <h2>This is state: {{ $s->name }}</h2>
         @foreach ($s->stations as $station )
-          <p>{{ $station->name }}</p>
+          <p><strong>{{ $station->name }}</strong></p>
+          @foreach($station->readings as $reading)
+            <p>{{$reading->cfs}} CFS at {{$reading->reading_time}}</p>
+          @endforeach
         @endforeach
       @endforeach
     </body>

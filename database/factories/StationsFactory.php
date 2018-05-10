@@ -19,6 +19,7 @@ $factory->define(App\Models\Station::class, function (Faker $faker) {
         'usgs_id' => $faker->unique()->ean8(),
         'lat' => $faker->latitude($min = 49, $max = 32),
         'lng' => $faker->longitude($min = -70, $max = 124),
-        'state_id' => rand(1, 50)
+        'state_id' => rand(1, 50),
+        'huc8' => $faker->ean8()
     ];
 });

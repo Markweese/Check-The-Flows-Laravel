@@ -13,10 +13,14 @@ class State extends Model
   public $timestamps = false;
 
   protected $with = [
-    'stations'
+    'stations', 'initiatives'
   ];
 
   public function stations() {
     return $this->hasMany('App\Models\Station');
+  }
+
+  public function initiatives() {
+    return $this->hasMany('App\Models\Initiative');
   }
 }
