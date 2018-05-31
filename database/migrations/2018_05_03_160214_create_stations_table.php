@@ -17,7 +17,7 @@ class CreateStationsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('usgs_id')->unique()->index();
-            $table->integer('huc8')->unsigned();
+            $table->integer('huc8')->unsigned()->nullable();
             $table->decimal('lat', 10, 7);
             $table->decimal('lng', 10, 7);
             $table->integer('state_id')->unsigned()->index();

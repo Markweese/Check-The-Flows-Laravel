@@ -12,7 +12,7 @@
       @foreach ($state as $s)
         <h2>This is state: {{ $s->name }}</h2>
         @foreach ($s->stations as $station )
-          <p><strong>{{ $station->name }}</strong></p>
+          <a href="/stations/{{$station->id}}">{{ $station->name }}</a>
           @foreach($station->readings as $reading)
             <p>{{$reading->cfs}} CFS at {{$reading->reading_time}}</p>
           @endforeach

@@ -18,7 +18,7 @@
         <h4>Conservation Groups</h4>
         <ul>
         @foreach ($s->initiatives as $initiative )
-          <li><a href="{{$initiative->landing_page}}"><img src="{{ $initiative->logo }}" alt="{{ $initiative->name }}">{{ $initiative->name }}</a></li>
+          <li><img src="{{ $initiative->logo }}" alt="{{ $initiative->name }}"><a href="{{$initiative->landing_page}}">{{ $initiative->name }}</a></li>
         @endforeach
         </ul>
 

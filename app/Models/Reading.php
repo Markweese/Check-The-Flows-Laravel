@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Reading extends Model
 {
   protected $fillable = [
-    'reading', 'parameter', 'reading_at', 'usgs_id', 'updated_at', 'created_at'
+    'ph', 'temp', 'cfs', 'conductance', 'reading_time', 'station_id',
   ];
 
   /**

@@ -21,8 +21,9 @@ class CreateInitiativesTable extends Migration
             $table->string('spokesperson_photo')->nullable();
             $table->string('landing_page');
             $table->text('statement');
-            $table->integer('huc8')->unsigned();
+            $table->integer('huc8')->unsigned()->nullable();
             $table->integer('state_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
