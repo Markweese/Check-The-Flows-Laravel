@@ -52,6 +52,8 @@ class SyncHistoricReadings implements ShouldQueue
       foreach($stations as $station) {
         //goes to the site selection page and scrapes for ts_id and site_id
         $summaryStats = array();
+        $startYear = null;
+        $endYear = null;
         $htmlUrl = 'https://waterdata.usgs.gov/nwis/monthly/?format=sites_selection_links&search_site_no=' . $station->usgs_id . '&amp;referred_module=sw';
         $ts_id = null;
         $site_id = null;
@@ -92,6 +94,7 @@ class SyncHistoricReadings implements ShouldQueue
                 }
             }
         } catch(\Exception $e) {
+            echo $e->getMessage();
             \Log::error($e);
         }
 
@@ -104,6 +107,7 @@ class SyncHistoricReadings implements ShouldQueue
         $stats_url =  'https://waterdata.usgs.gov/nwis/monthly?site_no=' . $station->usgs_id  . '&agency_cd=USGS&por_' . $station->usgs_id  . '_' . $ts_id  . '=' . $site_id  . ',00060,' . $ts_id  . ',1930-01,2018-06&referred_module=sw&format=rdb';
         
         //gets and stores the tab delimited file
+        try {
         $res = $client->request('GET', $stats_url);
         $rdbString = $res->getBody()->getContents();
 
@@ -117,23 +121,43 @@ class SyncHistoricReadings implements ShouldQueue
 
             if(count($stats) == 7 && ctype_digit($stats[5])) {
                 $historicStats[$stats[5]][] = $stats[6];
+                
+                //if the current year is lower than the min, change the min
+                if($stats[4] < $startYear || empty($startYear)) {
+                    $startYear = $stats[4];
+                }
+
+                //if the current year is higher than the max, change the max
+                if($stats[4] > $endYear || empty($endYear)) {
+                    $endYear = $stats[4];
+                }
             }
         }
 
         //get monthly summary stats
         foreach($historicStats as $key => $stats) {
-            $data = [
-                'max' => intval(max($stats)),
-                'min' => intval(min($stats)),
-                'average' => round(array_sum($stats)/count($stats),1)
-            ];
-
-            $summaryStats[$key] = $data;
+            $summaryStats['max_' . $key] = intval(max($stats));
+            $summaryStats['min_' . $key] = intval(min($stats));
+            $summaryStats['mean_' . $key] = round(array_sum($stats)/count($stats),1);
         }
 
-        var_dump($station->id);
-        UpsertHistoric::run(['station_id' => $station->id, 'usgs_id' => $station->usgs_id, 'name' => $station->name, 'summary_stats' => $summaryStats], TRUE); 
-        
+        $summaryStats['year_start'] = intval($startYear);
+        $summaryStats['year_end'] = intval($endYear);
+        $summaryStats['usgs_id'] = intval($station->usgs_id);
+        $summaryStats['station_id'] = intval($station->id);
+
+        echo 'waiting';
+
+        //go to the upsert
+        UpsertHistoric::run(['usgs_id' => intval($station->usgs_id), 'station_id' => $station->id], TRUE); 
+
+        } catch(\Exception $e) {
+            echo $e->getMessage();
+            \Log::error($e);
+        }
+
+        echo 'sent';
       }
+      return;
     }
 }

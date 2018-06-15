@@ -42,4 +42,11 @@ class Station extends Model {
     return $this->hasMany('App\Models\Initiative', 'state_id', 'state_id');
   }
 
+   /**
+   * Get historic data associated with station
+   */
+  public function historic() {
+    return $this->hasOne('App\Models\Historic');
+  }
+
 }
