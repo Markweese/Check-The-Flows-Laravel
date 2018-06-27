@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHistoricTable extends Migration
+class CreateHistoricsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateHistoricTable extends Migration
      */
     public function up()
     {
-        Schema::create('historic', function (Blueprint $table) {
+        Schema::create('historics', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('station_id');
-            $table->integer('usgs_id');
+            $table->string('usgs_id')->unique()->index();
             $table->integer('year_start')->nullable();
             $table->integer('year_end')->nullable();
             $table->integer('mean_1')->nullable();
@@ -66,6 +66,6 @@ class CreateHistoricTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('historic');
+        Schema::dropIfExists('historics');
     }
 }
