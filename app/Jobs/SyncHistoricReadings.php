@@ -42,10 +42,11 @@ class SyncHistoricReadings implements ShouldQueue
     public function handle()
     {
       $stations = [];
+      $num_historic = Historic::count();
       $client = new \GuzzleHttp\Client();
 
       if(empty($this->station)) {
-        $stations = Station::all();
+        $stations = Station::where('id', '>', $num_historic)->get();
       } else {
         array_push($stations, $this->station);
       }
